@@ -27,7 +27,7 @@ set_exception_handler('Core\Error::exceptionHandler');
  */
 $router = new Core\Router();
 
-// Add the routes
+// Add the routess
 $router->add('', ['controller' => 'Home', 'action' => 'index']);
 $router->add('{controller}/{action}');
     
