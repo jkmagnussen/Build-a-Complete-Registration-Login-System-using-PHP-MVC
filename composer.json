@@ -7,5 +7,8 @@
             "Core\\": "Core/",
             "App\\": "App/"
         }
+    },
+    "require-dev": {
+        "rector/rector": "^0.12.7"
     }
 }

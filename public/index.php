@@ -12,7 +12,7 @@
 require '../vendor/autoload.php';
 
 
-Twig_Autoloader::register();
+// Twig_Autoloader::register();
 
 /**
  * Error and Exception handling

@@ -6,4 +6,31 @@
 
 <h1>Sign up</h1>
 
+<form method="post" action="/signup/create">
+
+    <div>
+        <label for="inputName">Name</label>
+        <input id="inputName" name="name" placeholder="Name" autofocus />
+    </div>
+
+    <div>
+        <label for="inputEmail">Email address</label>
+        <input id="inputEmail" name="email" placeholder="email address" />
+
+    </div>
+
+    <div>
+        <label for="inputPassword">Password</label>
+        <input type="password" id="inputPassword" name="password" placeholder="password" />
+    </div>
+
+    <div>
+        <label for="inputPasswordConfirmation">Repeat Password</label>
+        <input type="password" id="inputPasswordConfirmation" name="password_confirmation" placeholder="Repeat password" />
+    </div>
+
+<button type="submit">Sign up</button>
+
+</form>
+
 {% endblock %}
