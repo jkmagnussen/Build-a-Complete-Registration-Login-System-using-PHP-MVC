@@ -7,7 +7,7 @@ use \Core\View;
 /**
  * Home controller
  *
- * PHP version 7.0
+ * PHPp version 7.0
  */
 class Signup extends \Core\Controller
 {
