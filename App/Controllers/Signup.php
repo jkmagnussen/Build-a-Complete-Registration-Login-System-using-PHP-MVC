@@ -13,7 +13,7 @@ class Signup extends \Core\Controller
 {
 
     /**
-     * Show the index pageeebb
+     * Show the index pageee
      *
      * @return void
      */
