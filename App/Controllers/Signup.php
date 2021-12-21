@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use \Core\View;
+use \App\Models\User;
 
 /**
  * Home controller
@@ -13,7 +14,7 @@ class Signup extends \Core\Controller
 {
 
     /**
-     * Show the index pageee
+     * Show the index pageee 
      *
      * @return void
      */
@@ -26,6 +27,10 @@ class Signup extends \Core\Controller
     /** Sign up a new user  */
 
     public function createAction(){
-        var_dump($_POST);
+        $user = new User($_POST);
+
+        $user->save();
+
+        View::renderTemplate('Signup/success.html');
     }
 }
