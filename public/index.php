@@ -12,7 +12,7 @@
 require '../vendor/autoload.php';
 
 /**
- * Error and Exception handling
+ * Error and Exception handlingg
  */
 
 error_reporting(E_ALL);
