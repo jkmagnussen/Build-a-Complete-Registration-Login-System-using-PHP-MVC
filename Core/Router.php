@@ -39,6 +39,7 @@ class Router
         $route = preg_replace('/\{([a-z]+)\}/', '(?P<\1>[a-z-]+)', $route);
 
         // Convert variables with custom regular expressions e.g. {id:\d+}
+    
         $route = preg_replace('/\{([a-z]+):([^\}]+)\}/', '(?P<\1>\2)', $route);
 
         // Add start and end delimiters, and case insensitive flag
@@ -46,7 +47,6 @@ class Router
 
         $this->routes[$route] = $params;
     }
-
     /**
      * Get all the routes from the routing table
      *

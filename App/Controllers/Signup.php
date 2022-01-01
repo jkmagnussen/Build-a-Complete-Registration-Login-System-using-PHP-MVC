@@ -6,7 +6,7 @@ use \Core\View;
 use \App\Models\User;
 
 /**
- * Home controller
+ * Home controllerr
  *
  * PHPp version 7.0
  */
