@@ -21,7 +21,7 @@ class User extends \Core\Model
 
      /** 
       * *
-      * Class constructorrs
+      * Class constructorr
       * 
       * @param array $data Initial property value 
       * 
