@@ -1,35 +1,41 @@
 {% extends 'base.html' %}
 
-{% block title %}Sign up {% endblock %}
+{% block title %}Sign up{% endblock %}
 
 {% block body %}
 
 <h1>Sign up</h1>
 
+{% if user.errors is not empty %}
+<p>Errors:</p>
+<ul>
+    {% for error in user.errors %}
+    <li>{{ error }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
 <form method="post" action="/signup/create">
 
     <div>
         <label for="inputName">Name</label>
-        <input id="inputName" name="name" placeholder="Name" autofocus />
+        <input id="inputName" name="name" placeholder="Name" autofocus value="{{ user.name }}" />
     </div>
-
     <div>
         <label for="inputEmail">Email address</label>
-        <input id="inputEmail" name="email" placeholder="email address" />
-
+        <input id="inputEmail" name="email" placeholder="email address" value="{{ user.email }}" />
     </div>
-
     <div>
         <label for="inputPassword">Password</label>
-        <input type="password" id="inputPassword" name="password" placeholder="password" />
+        <input type="password" id="inputPassword" name="password" placeholder="Password" />
     </div>
-
     <div>
-        <label for="inputPasswordConfirmation">Repeat Password</label>
-        <input type="password" id="inputPasswordConfirmation" name="password_confirmation" placeholder="Repeat password" />
+        <label for="inputPasswordConfirmation">Repeat password</label>
+        <input type="password" id="inputPasswordConfirmation" name="password_confirmation"
+            placeholder="Repeat password" />
     </div>
 
-<button type="submit">Sign up</button>
+    <button type="submit">Sign up</button>
 
 </form>
 

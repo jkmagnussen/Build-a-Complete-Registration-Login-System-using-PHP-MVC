@@ -6,15 +6,15 @@ use \Core\View;
 use \App\Models\User;
 
 /**
- * Home controller
+ * Signup controller
  *
- * PHPp version 7.0
+ * PHP version 7.0
  */
 class Signup extends \Core\Controller
 {
 
     /**
-     * Show the index page
+     * Show the signup page
      *
      * @return void
      */
@@ -23,17 +23,25 @@ class Signup extends \Core\Controller
         View::renderTemplate('Signup/new.html');
     }
 
-
-    /** Sign up a new user  */
-
-    public function createAction(){
+    /**
+     * Sign up a new user
+     *
+     * @return void
+     */
+    public function createAction()
+    {
         $user = new User($_POST);
 
-        if($user->save()){
-
+        if ($user->save()) {
+            
             View::renderTemplate('Signup/success.html');
+
         } else {
-            var_dump($user->errors);
+
+             View::renderTemplate('Signup/new.html', [
+                 'user' => $user
+             ]);
+
         }
     }
 }
