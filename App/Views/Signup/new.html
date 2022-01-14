@@ -2,6 +2,60 @@
 
 {% block title %}Sign up{% endblock %}
 
+{% block footer %}
+<script src="/js/hideShowPassword.min.js"></script>
+<script>
+    $.validator.addMethod('validPassword',
+        function(value, element, param){
+            if (value != ''){
+                if (value.match(/.*[a-z]+.*/i) == null){
+                    return false;
+                }
+                if (value.match(/.*\d+.*/) == null){
+                    return false;
+                }
+            }
+            return true;
+        },
+        'Must contain at least one letter and one number'
+    );
+
+    $(document).ready(function() {
+
+        $('#formSignup').validate({
+            rules: {
+                name: 'required',
+                email: {
+                    required: true,
+                    email: true,
+                    remote: '/account/validate-email'
+                },
+                password: {
+                    required: true,
+                    minlength: 6,
+                    validPassword: true
+                }
+            },
+            messages: {
+                email: {
+                    remote: 'email already taken'
+                }
+            }
+
+        });
+
+        /** 
+         * show password toggle button 
+         */
+        $('#inputPassword').hideShowPassword({
+            show: false,
+            innerToggle: 'focus'
+        });
+    });
+</script>
+
+{% endblock %}
+
 {% block body %}
 
 <h1>Sign up</h1>
@@ -15,24 +69,19 @@
 </ul>
 {% endif %}
 
-<form method="post" action="/signup/create">
+<form method="post" action="/signup/create" id="formSignup">
 
     <div>
         <label for="inputName">Name</label>
-        <input id="inputName" name="name" placeholder="Name" autofocus value="{{ user.name }}" />
+        <input id="inputName" name="name" placeholder="Name" autofocus value="{{ user.name }}" required />
     </div>
     <div>
         <label for="inputEmail">Email address</label>
-        <input id="inputEmail" name="email" placeholder="email address" value="{{ user.email }}" />
+        <input id="inputEmail" name="email" placeholder="email address" value="{{ user.email }}" required type="email" />
     </div>
     <div>
         <label for="inputPassword">Password</label>
-        <input type="password" id="inputPassword" name="password" placeholder="Password" />
-    </div>
-    <div>
-        <label for="inputPasswordConfirmation">Repeat password</label>
-        <input type="password" id="inputPasswordConfirmation" name="password_confirmation"
-            placeholder="Repeat password" />
+        <input type="password" id="inputPassword" name="password" placeholder="Password" required  />
     </div>
 
     <button type="submit">Sign up</button>
