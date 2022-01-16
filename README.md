@@ -1,5 +1,12 @@
 Build a Complete Registration and Login System using PHP MVC:
 
+Browser accessibility:
+
+<VirtualHost \*:80>
+DocumentRoot "/Users/josephmagnussen/Documents/Development/Udemy/Registration_Login_PHP_MVC/public"
+ServerName phpmvc.test
+</VirtualHost>
+
 Course goals:
 
 Learn the basic concepts, tools and functions that you will need for user authentication using a PHP MVC framework. Add registration, login, remember me, account activation, password reset by email and more using the PHP MVC framework.
