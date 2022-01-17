@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+
+<h1>Log in</h1>
+
+    <form action="/login/create" method="post">
+    
+        <div>
+            <label for="inputEmail">Email address</label>
+            <input type="email" id="inputEmail" name="email" placeholder="Email address" autofocus 
+            value={{ email }}/>
+        </div>
+        <div>
+            <label for="inputPassword">Password</label>
+            <input type="password" id="inputPassword" name="password" placeholder="Password" />
+        </div>
+    
+        <button type="submit">Log in</button>
+    
+    </form> 
+
+{% endblock %}
