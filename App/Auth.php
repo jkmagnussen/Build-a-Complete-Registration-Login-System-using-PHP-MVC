@@ -52,17 +52,8 @@ use \App\Models\User;
         session_destroy();
     }
 
-    /**
-     * Return indicator of whether a user is logged in or not
-     * 
-     *  @return boolean
-     */
-    public static function isLoggedIn(){
-        return isset($_SESSION['user_id']);
-    }
-
     /** 
-     *  Remember the prigionally-requested page in the session
+     *  Remember the origionally-requested page in the session
      * 
      * @return void
      */
