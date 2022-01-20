@@ -4,10 +4,13 @@
 }
 
 .alert-info {
+  background-color: #d9edf7;
 }
 
 .alert-success {
+  background-color: #dff0d8;
 }
 
 .alert-warning {
+  background-color: #fcf8e3;
 }

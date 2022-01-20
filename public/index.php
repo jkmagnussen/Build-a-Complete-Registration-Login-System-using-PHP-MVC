@@ -6,6 +6,8 @@
  * PHP version 7.0
  */
 
+ ini_set('session.cookie_lifetime', '864000'); // ten days in seconds
+
 /**
  * Composer
  */  
