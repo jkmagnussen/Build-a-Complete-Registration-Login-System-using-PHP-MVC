@@ -5,7 +5,7 @@ namespace App\Models;
 use PDO;
 use \App\Token; 
 /**
- * Remembered login model 
+ * Remembered login modell
  * 
  * PHP version 7.0 + 
  */
