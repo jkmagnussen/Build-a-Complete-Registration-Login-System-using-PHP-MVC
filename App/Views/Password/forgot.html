@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %} Forgot password {% endblock %}
+
+{% block body %}
+
+<h1>Request password reset</h1>
+
+<form method="post" action="/password/request-reset">
+    <div>
+        <label for="inputEmail">Email address</label>
+        <input type="email" id="inputEmail" placeholder="Email address" autofocus required />
+    </div>
+    <button type="submit">Send password reset</button>
+</form>
+
+{% endblock %}
