@@ -26,14 +26,15 @@ class Mail {
         // First, instantiate the SDK with your API credentials
         $mg = new Mailgun(Config::MAILGUN_API_KEY); // For EU servers
         $domain = Config::MAILGUN_DOMAIN;
+        
 
         // Now, compose and send your message.
         // $mg->messages()->send($domain, $params);
-        $mg->sendMessage($domain, array('from'    => 'bob@example.com',
+        $mg->sendMessage($domain, ['from'    => 'bob@example.com',
                                         'to'      => $to,
                                         'subject' => $subject,
                                         'text'    => $text,
-                                        'html'    => $html));
+                                        'html'    => $html]);
     }
 
 }

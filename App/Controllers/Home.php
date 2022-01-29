@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use \Core\View;
+use\App\Mail;
 
 /**
  * Home controller
@@ -19,5 +20,6 @@ class Home extends \Core\Controller
      */
     public function indexAction(){
         View::renderTemplate('Home/index.html');
+        Mail::send('jkmagnussen@outlook.com', 'Password reset','test1mvc', 'test1mvchtml');
     }
 }
