@@ -1,9 +1,9 @@
 <?php 
-
 namespace App;
 
-use Mailgun\Mailgun;
+require '../vendor/autoload.php';
 use App\Config;
+use Mailgun\Mailgun;
 
 /** 
  * 
@@ -21,20 +21,18 @@ class Mail {
      * 
      * @return mixed 
      */
+
     public static function send($to, $subject, $text, $html){
 
         // First, instantiate the SDK with your API credentials
-        $mg = new Mailgun(Config::MAILGUN_API_KEY); // For EU servers
+        $mg = new Mailgun(Config::MAILGUN_API_KEY); 
         $domain = Config::MAILGUN_DOMAIN;
-        
 
-        // Now, compose and send your message.
-        // $mg->messages()->send($domain, $params);
-        $mg->sendMessage($domain, ['from'    => 'bob@example.com',
-                                        'to'      => $to,
-                                        'subject' => $subject,
-                                        'text'    => $text,
-                                        'html'    => $html]);
+        $result = $mg->sendMessage($domain, array(
+            'from'    => 'user <mailgun@YOUR_DOMAIN_NAME>',
+            'to'      => $to,
+            'subject' => $subject,
+            'text'    => $text,
+            'html'    => $html));
     }
-
 }
