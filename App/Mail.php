@@ -28,8 +28,8 @@ class Mail {
         $mg = new Mailgun(Config::MAILGUN_API_KEY); 
         $domain = Config::MAILGUN_DOMAIN;
 
-        $result = $mg->sendMessage($domain, array(
-            'from'    => 'Excited User <mailgun@YOUR_DOMAIN_NAME>',
+        $mg->sendMessage($domain, array(
+            'from'    => 'MVC project <mailgun@jkmagnussen.com>',
             'to'      => $to,
             'subject' => $subject,
             'text'    => $text,

@@ -5,7 +5,7 @@ namespace App\Models;
 use PDO;
 use \App\Token;
 use \App\Mail;
-use \App\Views;
+use \Core\View;
 
 /**
  * User model
