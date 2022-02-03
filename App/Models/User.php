@@ -49,8 +49,12 @@ class User extends \Core\Model
 
             $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
 
-            $sql = 'INSERT INTO users (name, email, password_hash)
-                    VALUES (:name, :email, :password_hash)';
+            $token = new Token();
+            $hashed_token = $token->getHash();
+            $this->activation_token = $token->getValue();
+
+            $sql = 'INSERT INTO users (name, email, password_hash, activation_hash)
+                    VALUES (:name, :email, :password_hash, :activation_hash)';
 
             $db = static::getDB();
             $stmt = $db->prepare($sql);
@@ -58,6 +62,7 @@ class User extends \Core\Model
             $stmt->bindValue(':name', $this->name, PDO::PARAM_STR);
             $stmt->bindValue(':email', $this->email, PDO::PARAM_STR);
             $stmt->bindValue(':password_hash', $password_hash, PDO::PARAM_STR);
+            $stmt->bindValue(':activation_hash', $hashed_token, PDO::PARAM_STR);
 
             return $stmt->execute();
         }
@@ -81,7 +86,7 @@ class User extends \Core\Model
         if (filter_var($this->email, FILTER_VALIDATE_EMAIL) === false) {
             $this->errors[] = 'Invalid email';
         }
-        if (static::emailExists($this->email)) {
+        if (static::emailExists($this->email, $this->id ?? null)) { 
             $this->errors[] = 'email already taken';
         }
 
@@ -106,9 +111,15 @@ class User extends \Core\Model
      *
      * @return boolean  True if a record already exists with the specified email, false otherwise
      */
-    public static function emailExists($email)
-    {
-       return static::findByEmail($email) !== false;
+    public static function emailExists($email, $ignore_id = null){
+       $user = static::findByEmail($email);
+
+       if($user){
+           if($user->id != $ignore_id){
+           return true;
+           }
+       }
+       return false;
     }
 
     public static function findByEmail($email){
@@ -277,5 +288,51 @@ class User extends \Core\Model
                 return $user;
             }
         }
+    }
+
+    /** Reset the password 
+     * 
+     * @param string $password The new password 
+     * 
+     * @return boolean True if the password was updated successfully, false otherwise 
+     */
+    public function resetPassword($password){
+        $this->password = $password;
+
+        $this->validate();
+
+        if(empty($this->errors)){
+            $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
+
+            $sql = 'UPDATE users 
+            SET password_hash = :password_hash,
+            password_reset_hash = NULL,
+            password_reset_expiry = NULL
+            WHERE id = :id';
+
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+
+            $stmt->bindValue(':id', $this->id, PDO::PARAM_INT);
+            $stmt->bindValue(':password_hash', $password_hash, PDO::PARAM_STR);
+
+            return $stmt->execute();
+        }
+        return false;
+    }
+
+
+        /** 
+     * Send password reset instructions in an email to the user 
+     * 
+     * @return void
+     */
+    public function sendActivationEmail(){
+        $url = 'http://' . $_SERVER['HTTP_HOST'] . '/signup/activate/' . $this->activation_token;
+
+        $text = View::getTemplate('Signup/activation_email.txt',['url' => $url]);
+        $html= View::getTemplate('Signup/activation_email.html',['url' => $url]);
+
+        Mail::send($this->email, 'Account activation', $text, $html);
     }
 } 

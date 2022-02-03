@@ -1,0 +1,5 @@
+Account activation
+
+Thank you for signing up. Please click the floowing link t oactivate your account: 
+
+{{ url }}
