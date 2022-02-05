@@ -337,7 +337,7 @@ class User extends \Core\Model
     }
 
     /**
-     * Activate the user account with the specified activation token 
+     * Activate the user account with the specified activation tokenn 
      * @param string $value Activation token from the URL 
      * 
      * @return void
