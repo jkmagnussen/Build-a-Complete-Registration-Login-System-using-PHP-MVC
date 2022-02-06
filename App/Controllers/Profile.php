@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use \Core\View;
+use App\Auth;
 /** 
  *  Profile controller 
  * 
@@ -15,6 +16,8 @@ class Profile extends Authenticated{
     * @return void 
     */
     public function showAction(){
-        View::renderTemplate('Profile/show.html');
+        View::renderTemplate('Profile/show.html', [
+            'user' => Auth::getUser()
+        ]);
     }
 }
