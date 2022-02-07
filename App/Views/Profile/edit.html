@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block footer %}
+<script src="/js/hideShowPassword.min.js"></script>
+<script src="/js/app.js"></script>
+<script>
+    $(document).ready(function(){
+
+        $('#formProfile').validate({
+            rules: {
+                name: 'required',
+                email: {
+                    required: true,
+                    email: true,
+                    remote: '/account/validate-email'
+                },
+                password: {
+                    required: true,
+                    minlength: 6,
+                    validPassword: true
+                }
+            },
+            messages: {
+                email: {
+                    remote: 'email already taken'
+                }
+            }
+
+        });
+
+        /** 
+         * show password toggle button 
+         */
+        $('#inputPassword').hideShowPassword({
+            show: false,
+            innerToggle: 'focus'
+        });
+    });
+</script>
+
+{% endblock %}
+
+{% block body %}
+
+<h1>Profile</h1>
+
+{% if user.errors is not empty %}
+<p>Errors:</p>
+<ul>
+    {% for error in user.errors %}
+    <li>{{ error }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<form method="post" id="formProfile">
+
+    <div>
+        <label for="inputName">Name</label>
+        <input id="inputName" name="name" placeholder="Name" value="{{ user.name }}" required />
+    </div>
+    <div>
+        <label for="inputEmail">Email address</label>
+        <input id="inputEmail" name="email" placeholder="email address" value="{{ user.email }}" required type="email" />
+    </div>
+    <div>
+        <label for="inputPassword">Password</label>
+        <input type="password" id="inputPassword" name="password" placeholder="Password" required  />
+    </div>
+
+    <button type="submit">Save</button>
+    <a href="/profile/show">Cancel</a>
+
+</form>
+
+{% endblock %}
