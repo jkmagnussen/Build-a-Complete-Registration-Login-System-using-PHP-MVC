@@ -8,13 +8,20 @@
 <script>
     $(document).ready(function(){
 
+        var userId = '{{ user.id }}';
+
         $('#formProfile').validate({
             rules: {
-                name: 'required',
                 email: {
                     required: true,
                     email: true,
-                    remote: '/account/validate-email'
+                    remote: {
+                        user: '/account/validate-email', 
+                        data: {
+                            ignore_id: function(){
+                                return userId;
+                            }
+                        }
                 },
                 password: {
                     required: true,
@@ -67,7 +74,9 @@
     </div>
     <div>
         <label for="inputPassword">Password</label>
-        <input type="password" id="inputPassword" name="password" placeholder="Password" required  />
+        <input type="password" id="inputPassword" name="password" placeholder="Password" 
+        aria-describedby="helpBlock" />
+        <span id="helpBlock">Leave blank to keep current password</span>
     </div>
 
     <button type="submit">Save</button>
