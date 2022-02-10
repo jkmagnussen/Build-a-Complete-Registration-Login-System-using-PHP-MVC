@@ -12,19 +12,20 @@
 
         $('#formProfile').validate({
             rules: {
-                email: {
-                    required: true,
-                    email: true,
+                    name: 'required',
+                    email: {
+                        required: true,
+                        email: true, 
                     remote: {
-                        user: '/account/validate-email', 
+                        url: '/account/validate-email', 
                         data: {
                             ignore_id: function(){
                                 return userId;
                             }
                         }
+                    }
                 },
                 password: {
-                    required: true,
                     minlength: 6,
                     validPassword: true
                 }
@@ -34,7 +35,6 @@
                     remote: 'email already taken'
                 }
             }
-
         });
 
         /** 
@@ -62,7 +62,7 @@
 </ul>
 {% endif %}
 
-<form method="post" id="formProfile">
+<form method="post" id="formProfile" action="/profile/update">
 
     <div>
         <label for="inputName">Name</label>
