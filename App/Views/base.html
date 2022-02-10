@@ -3,9 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="/css/styles.css" />
 </head>
 <body>
+    <div class="container">
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            {% if current_user %} 
+            <li><a href="/profile/show">Profile</a></li>
+            <li><a href="/logout">Logout</a></li>
+            {% endif %}
+        </ul>
+    </nav>
     {% for message in flash_messages %}
     <div class="alert alert-{{ message.type }}">
         {{ message.body }}
@@ -22,5 +33,6 @@
 
     {% block footer %}
     {% endblock %}
+    </div>
 </body>
 </html>
